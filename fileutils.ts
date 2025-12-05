@@ -12,5 +12,12 @@ export function readfile(filename : string, day:number) : string{
 }
 
 export function readlines(filename: string, day:number){
-    return readfile(filename,day).split(/\r?\n/);
+    return readfile(filename,day).split(linesplitregexp);
 }
+
+export function splitlines(stringtosplit: string)
+{
+    return stringtosplit.split(linesplitregexp);
+}
+
+export const linesplitregexp:RegExp = /\r?\n/;
