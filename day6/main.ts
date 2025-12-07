@@ -1,4 +1,4 @@
-import { readfile, readlines, splitlines } from "../fileutils.ts";
+import { readfile, readlines, splitlines } from "../utils/fileutils.ts";
 
 function to_operator(opstring: string): ((x:bigint, y:bigint) => bigint) {
     if(opstring === "*"){

@@ -1,4 +1,4 @@
-import { readfile, readlines } from "../fileutils.ts";
+import { readfile, readlines } from "../utils/fileutils.ts";
 
 let totalaccumulator: number = 0;
 let accumulator:number = -1;

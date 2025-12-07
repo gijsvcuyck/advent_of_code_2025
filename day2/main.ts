@@ -1,4 +1,4 @@
-import {readfile, readlines } from "../fileutils.ts";
+import {readfile, readlines } from "../utils/fileutils.ts";
 
 // the hello world program
 console.log('Hello World');
