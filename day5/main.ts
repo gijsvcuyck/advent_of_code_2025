@@ -3,24 +3,6 @@ import { readfile, readlines, splitlines } from "../fileutils.ts";
 let accumulator:number = 0;
 
 
-// A first attempt at making an enum.
-// It works, but I dont think you can add methods or interface implementations to this, as it would break the following type definition.
-const PaperField = {
-    EMPTY: '.',
-    PAPER: '@',
-    MARKED: 'X'
-} as const;
-type PaperField = (typeof PaperField)[keyof typeof PaperField];
-
-function parsefield(f: string): PaperField {
-    const values: string[] = Object.values(PaperField);
-    if (values.includes(f)) {
-        return f as PaperField
-    } else {
-        throw new Error(`${f} is not a valied Field`);
-    }
-}
-
 class Range {
     start:number;
     end:number;
