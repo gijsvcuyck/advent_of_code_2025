@@ -1,3 +1,6 @@
+import { fillArray, fillArrayCallback } from "./arrayutils.ts";
+import { Point } from "./point.ts";
+
 /**
  * A two dimensional grid of elements.
  * Access works with the get and set methods, which both protect against out of bound acess.
@@ -14,6 +17,13 @@ export class Grid<FieldT> {
         this.default_elem = default_elem;
     }
 
+    static buildGrid<FieldT>(default_elem: FieldT, width:number, height:number) : Grid<FieldT>{
+        return new Grid(default_elem,fillArrayCallback(height, () => fillArray(width,default_elem)));
+    }
+
+    getPoin(p:Point, val:FieldT){
+        this.get(p.x,p.y);
+    }
 
     get(x: number, y: number): FieldT {
         if (y < 0 || y >= this.grid.length || x < 0 || x >= this.grid[y].length) {
@@ -21,6 +31,10 @@ export class Grid<FieldT> {
         } else {
             return this.grid[y][x]
         }
+    }
+
+    setPoint(p:Point,val:FieldT){
+        this.set(p.x,p.y,val);
     }
 
     set(x: number, y: number, val: FieldT) {
@@ -62,6 +76,18 @@ export class Grid<FieldT> {
                 this.grid[y][x] = f(this.grid[y][x])
             }
         }
+    }
+
+    toString(){
+        let result:string = ""
+        for(let y = 0; y<this.getheight(); y++){
+            let row = this.grid[y]
+            for(let x = 0; x< row.length; x++){
+                result+=row[x]
+            }
+            result+="\n";
+        }
+        return result;
     }
 
 }

@@ -1,23 +1,32 @@
 import fs from 'node:fs';
 
-export function readfile(filename : string, day:number) : string{
+export function readfile(filename: string, day: number): string {
     let retval;
     try {
-        retval = fs.readFileSync('./day'+ day + '/' +filename, 'utf8');
+        retval = fs.readFileSync('./day' + day + '/' + filename, 'utf8');
     } catch (err) {
         console.error(err);
     }
-    if (!retval){console.error("error while reading file")}
+    if (!retval) { console.error("error while reading file") }
     return retval!;
 }
 
-export function readlines(filename: string, day:number){
-    return readfile(filename,day).split(linesplitregexp);
+export function readlines(filename: string, day: number) {
+    return readfile(filename, day).split(linesplitregexp);
 }
 
-export function splitlines(stringtosplit: string)
-{
+export function splitlines(stringtosplit: string) {
     return stringtosplit.split(linesplitregexp);
 }
 
-export const linesplitregexp:RegExp = /\r?\n/;
+export const linesplitregexp: RegExp = /\r?\n/;
+
+
+export function writefile(filename: string,content:string,day:number) {
+    try {
+        fs.writeFileSync('./day' + day + '/' + filename, content);
+        // file written successfully
+    } catch (err) {
+        console.error(err);
+    }
+}
