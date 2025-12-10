@@ -177,7 +177,7 @@ function starry_search(start:Joltages, machine:Machine):number{
     // Open set is empty but goal was never reached
     throw new Error("A* failed")
 }
-let input: Machine[]= readlines('isolation.txt',10).map(l=>new Machine(l));
+let input: Machine[]= readlines('user.txt',10).map(l=>new Machine(l));
 
 const QUESTION :number = 2
 
@@ -221,9 +221,9 @@ async function run_z3_solution(stepAccumulator:number): Promise<number>{
 
     return init().then(async ({ Context }) => {
         let debuglog = "";
-        for(let mId= 0; mId < input.length; mId++){
+        const { Int, Optimize} = Context(`main`);
+        for(let mId= input.length-1; mId >= 0; mId--){
             let machine = input[mId];
-            const { Int, Optimize} = Context("main");
             const solver = new Optimize();
             let variables: Arith<"main">[] = [];
             for(let bId=0; bId<machine.buttons.length;bId++)
